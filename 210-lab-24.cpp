@@ -1,17 +1,17 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include <list>
+#include <set>
 #include <limits> // for try-catch
 #include "Goat.h"
 using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20;
 
-int select_goat(list<Goat> trip);
-void delete_goat(list<Goat> &trip);
-void add_goat(list<Goat> &trip, string, int, string);
-void display_trip(list<Goat> trip);
+int select_goat(set<Goat> trip);
+void delete_goat(set<Goat> &trip);
+void add_goat(set<Goat> &trip, string, int, string);
+void display_trip(set<Goat> trip);
 int main_menu();
 
 int main() {
@@ -30,8 +30,8 @@ int main() {
     while (fin1 >> colors[i++]);
     fin1.close();
 
-    // create a list for goats
-    list <Goat> myTrip;
+    // create a set for goats
+    set <Goat> myTrip;
 
     int choice = 0;
     while (choice != 4) {
@@ -58,12 +58,12 @@ int main() {
     return 0;
 }
 
-int select_goat(list<Goat> trip) {
+int select_goat(set<Goat> trip) {
 // return the index of a goat given the name input by user
     string nameIn; // user enters name of goat to delete
     cout << "Enter name of goat to delete: ";
     cin >> nameIn;
-    int count = 0; // for checking whether we've reached the end of the list
+    int count = 0; // for checking whether we've reached the end of the set
     // search for a goat with this name
     for(const Goat g : trip){
         if (g.get_name() == nameIn) 
@@ -77,10 +77,10 @@ int select_goat(list<Goat> trip) {
     return count;
 }
 
-void delete_goat(list<Goat> &trip) {
+void delete_goat(set<Goat> &trip) {
 // prompt the user for a name and delete the first instance of the goat with that name
     if(trip.size() == 0) {
-        cout << "The list is empty." << endl;
+        cout << "The set is empty." << endl;
         return;
     }
     int i = select_goat(trip); // i = index of the goat to delete
@@ -96,16 +96,16 @@ void delete_goat(list<Goat> &trip) {
     }
 }
 
-void add_goat(list<Goat> &trip, string name, int age, string color ) {
-// create a new goat and add it to the list
+void add_goat(set<Goat> &trip, string name, int age, string color ) {
+// create a new goat and add it to the set
     Goat g(name, age, color);
     trip.push_back(g);
 }
 
-void display_trip(list<Goat> trip) {
+void display_trip(set<Goat> trip) {
 // display a list of all the goats and their info
     if(trip.size() == 0) {
-        cout << "The list is empty." << endl;
+        cout << "The set is empty." << endl;
         return;
     }
     int count = 0; // for numbering the list of goats displayed
