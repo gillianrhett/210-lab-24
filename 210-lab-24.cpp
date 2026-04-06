@@ -88,7 +88,7 @@ void delete_goat(set<Goat> &trip) {
     if (i != -1) { // if the goat was found
         for (Goat g : trip) {
             if (i == cur) {
-                trip.remove(g);
+                trip.erase(g);
                 return;
             }
             cur++;
@@ -99,7 +99,7 @@ void delete_goat(set<Goat> &trip) {
 void add_goat(set<Goat> &trip, string name, int age, string color ) {
 // create a new goat and add it to the set
     Goat g(name, age, color);
-    trip.push_back(g);
+    trip.insert(g);
 }
 
 void display_trip(set<Goat> trip) {
